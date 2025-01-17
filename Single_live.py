@@ -8,6 +8,7 @@ import random
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
+from security import safe_requests
 
 
 def get_url(name):
@@ -88,7 +89,7 @@ def download_m3u8(url, name, initial_url=None):
         # 下载M3U8文件
         # with requests.get(url, timeout=10) as response:
         #     response.raise_for_status()
-        response = requests.get(url, stream=True, timeout=15)
+        response = safe_requests.get(url, stream=True, timeout=15)
         response.raise_for_status()  # 检查请求是否成功
         m3u8_content = response.text
     except requests.exceptions.Timeout as e:
@@ -114,7 +115,7 @@ def download_m3u8(url, name, initial_url=None):
         for i, segment in enumerate(segments[:3]):
             start_time = time.time()
             segment_url = url.rsplit('/', 1)[0] + '/' + segment
-            response = requests.get(segment_url)
+            response = safe_requests.get(segment_url)
             end_time = time.time()
 
             # 将视频片段保存到本地
