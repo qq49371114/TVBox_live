@@ -1,4 +1,3 @@
-import random
 import requests
 from lxml import etree
 import os
@@ -11,6 +10,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from proxyTest import get_valid_proxies
+import secrets
 
 
 def get_url(name):
@@ -32,7 +32,7 @@ def get_url(name):
         "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Epiphany/42.3 Safari/537.36",
         "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.5845.179 Safari/537.36 OPR/103.0.4928.47",
     ]
-    user_agent = random.choice(user_agents)
+    user_agent = secrets.choice(user_agents)
     # 配置ChromeOptions以启用无头模式
     chrome_options = Options()
     chrome_options.add_argument("--headless")
