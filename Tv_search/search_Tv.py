@@ -120,7 +120,7 @@ def download_m3u8(url, name, initial_url=None):
         for i, segment in enumerate(segments[:3]):
             start_time = time.time()
             segment_url = url.rsplit('/', 1)[0] + '/' + segment
-            response = requests.get(segment_url)
+            response = requests.get(segment_url, timeout=60)
             end_time = time.time()
 
             # 将视频片段保存到本地
